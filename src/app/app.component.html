@@ -1,0 +1,36 @@
+<!-- Toolbar -->
+<a
+  [href]="hrefVal"
+  [attr.updateLink]="updatedLink"
+  [attr.data-link]="updatedLink"
+  >Homepage</a
+>
+<div class="content" role="main">
+  <!-- Highlight Card -->
+  <div class="card highlight-card card-small">
+    <span>{{ title }} app is running!</span>
+  </div>
+
+  <!-- Resources -->
+  <!-- <h2>{{ formName }}</h2> -->
+  <!-- <app-profile-editor></app-profile-editor> -->
+  <svg
+    id="clouds"
+    alt="Gray Clouds Background"
+    xmlns="http://www.w3.org/2000/svg"
+    width="2611.084"
+    height="485.677"
+    viewBox="0 0 2611.084 485.677"
+  ></svg>
+</div>
+<!-- <app-new-inventory-form></app-new-inventory-form>  -->
+<app-navigation-menu></app-navigation-menu> 
+<router-outlet></router-outlet>
+
+<!-- <div>
+  <ul *ngFor ="let item of inventory let i = index">
+    <li>ItemID: <b>{{item._id}}</b>, Item Name: <b>{{item.itemName}}</b>, Item Category <b>{{item.itemCategory}}</b>
+      , Item Price: <b>${{item.price}}</b>, Stock Amount: <b>{{item.stock}}</b> <button mat-button color="warn" 
+      (click)="onDelete(item._id)"><b>DELETE</b></button></li>
+  </ul>
+</div> -->
