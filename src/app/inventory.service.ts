@@ -39,6 +39,6 @@ export class InventoryService {
       .subscribe((responseData) => {
         console.log(responseData);
       });
-    location.reload();
+    
   }
 }

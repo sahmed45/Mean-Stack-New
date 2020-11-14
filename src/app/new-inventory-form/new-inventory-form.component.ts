@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InventoryService } from '../inventory.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-new-inventory-form',
   templateUrl: './new-inventory-form.component.html',
@@ -11,7 +12,7 @@ export class NewInventoryFormComponent implements OnInit {
   @Input() price: number;
   @Input() stock: number;
 
-  constructor(private _myService: InventoryService) {}
+  constructor(private _myService: InventoryService, private router:Router) {}
   onSubmit() {
     console.log(
       'You submitted: ' +
@@ -29,6 +30,7 @@ export class NewInventoryFormComponent implements OnInit {
       this.price,
       this.stock
     );
+    this.router.navigate(['/listInventory']);
   }
 
   ngOnInit() {}
