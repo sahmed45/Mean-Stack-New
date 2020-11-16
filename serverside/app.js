@@ -57,6 +57,34 @@ app.post("/inventory", (req, res, next) => {
     price: req.body.price,
     stock: req.body.stock,
   });
+
+  // serve incoming put requests to /inventory
+  app.put('/inventory/:id', (req, res, next) => {
+    console.log("id: " + req.params.id)
+    // check that the parameter id is valid 
+    if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+      //find a document and set new first and last names
+      Item.findOneAndUpdate({_id: req.params.id},
+        {$set:{itemName: req.body.itemName,
+          itemCategory: req.body.itemCategory,
+          price: req.body.price,
+          stock: req.body.stock,}},{new:true}) 
+       .then((inventory) => {
+          if (inventory) { //what was updated
+            console.log(inventory);
+          } else {
+            console.log("no data exist for this id");
+          }
+       })
+      .catch((err) => {
+        console.log(err);
+       });
+   } else {
+     console.log("please provide correct id");
+   }
+    
+  });  
+
   //send the document to the database
   item
     .save()

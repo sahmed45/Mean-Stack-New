@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InventoryService } from '../inventory.service';
 import {Router} from '@angular/router';
+import {ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-new-inventory-form',
   templateUrl: './new-inventory-form.component.html',
@@ -11,8 +12,9 @@ export class NewInventoryFormComponent implements OnInit {
   @Input() itemCategory: string;
   @Input() price: number;
   @Input() stock: number;
-
-  constructor(private _myService: InventoryService, private router:Router) {}
+  public mode = 'add'; //default mode
+  private id: string; //student ID
+  constructor(private _myService: InventoryService, private router:Router,public route: ActivatedRoute) {}
   onSubmit() {
     console.log(
       'You submitted: ' +
@@ -31,7 +33,27 @@ export class NewInventoryFormComponent implements OnInit {
       this.stock
     );
     this.router.navigate(['/listInventory']);
+    if(this.mode == 'add')
+      this._myService.addInventory( this.itemName,
+        this.itemCategory,
+        this.price,
+        this.stock);
+    if(this.mode == 'edit')
+      this._myService.updateInventory( this.id, this.itemName,
+        this.itemCategory,
+        this.price,
+        this.stock);
+
   }
 
-  ngOnInit() {}
+  ngOnInit(){
+    this.route.paramMap.subscribe((paramMap: ParamMap ) => {
+       if (paramMap.has('_id'))
+         { this.mode = 'edit'; /*request had a parameter _id */ 
+           this.id = paramMap.get('_id');}
+       else {this.mode = 'add';
+           this.id = null; }
+     });
+  }
+  
 }

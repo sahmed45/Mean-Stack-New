@@ -28,7 +28,8 @@ export class InventoryService {
     itemCategory: string,
     price: number,
     stock: number
-  ) {
+  ) 
+  {
     this.http
       .post('http://localhost:8000/inventory', {
         itemName,
@@ -41,4 +42,21 @@ export class InventoryService {
       });
     
   }
+  updateInventory(itemID: string,itemName: string,
+    itemCategory: string,
+    price: number,
+    stock: number) {
+    //request path http://localhost:8000/students/5xbd456xx 
+    //first and last names will be send as HTTP body parameters 
+        this.http.put("http://localhost:8000/inventory/" 
+             + itemID,{  itemName,
+              itemCategory,
+              price,
+              stock, })
+          .subscribe(() => {
+              console.log('Updated: ' + itemID);
+          });
+          location.reload();
+    }
+
 }

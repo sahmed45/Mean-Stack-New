@@ -28,7 +28,11 @@ const appRoutes: Routes = [ {
  },       {
    path: 'listInventory',       //when inventory listed
    component: ListInventoryComponent
- },       {
+ }, 
+ {
+  path: 'editInventory/:_id',         //when students edited 
+  component: NewInventoryFormComponent
+},      {
    path: '**',                 //when path cannot be found
    component: NotFoundComponent
  }
